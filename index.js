@@ -1,8 +1,8 @@
 const inquirer = require('inquirer')
 
-const Word = require('./word');
+const { Word, guessResult } = require('./word');
 
-const allowedGuesses = 10;
+const allowedGuesses = 4;
 
 class Game {
   constructor() {
@@ -24,11 +24,15 @@ class Game {
     this.guessesLeft = allowedGuesses;
   }
 
+  printDivider() {
+    console.log('========================================')
+  }
+
   async playRound() {
     this.initializeGame()
     this.chooseRandomWord();
 
-    for (let i = 0; i < this.guessesLeft; i++) {
+    while (this.guessesLeft) {
       console.log("Guesses left: " + this.guessesLeft);
 
       await inquirer.prompt({
@@ -37,23 +41,44 @@ class Game {
         message: 'Choose a character',
         validate: (guessedLetter) => {
           guessedLetter = guessedLetter.toLowerCase()
+          const checkGuessResult = this.wordObj.guessChar(guessedLetter);
           // Check if input is a valid letter
-          if ("abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && this.wordObj.guessChar(guessedLetter)) {
+          if ("abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && checkGuessResult != guessResult.ALREADY_GUESSED) {
+            if (checkGuessResult === guessResult.INCORRECT_GUESS) {
+              // Guessed letter not in word
+              this.guessesLeft--;
+              console.log('\n\nIncorrect!\n')
+            }
+            else {
+              // Guessed letter is in word
+              console.log('\n\nCORRECT!\n')
+            }
+            this.printWord();
             return true;
           }
           return false;
         }
       });
-      this.printWord();
+      
       if (this.wordObj.allCharactersGuessed()) {
+        // Win
+        this.printDivider()
+        console.log('You win!')
+        this.wins++;
         return true
       }
     }
+    // Loss
+    this.losses++;
+    this.printDivider()
+    console.log('You Lose!')
+    console.log('The correct word is: ')
+    console.log(this.wordObj.revealWord())
     return false
   }
 
   printWord() {
-    console.log(this.wordObj.getWord())
+    console.log(this.wordObj.getWord() + '\n')
   }
 }
 
@@ -63,14 +88,7 @@ async function main() {
   while (true) {
     console.log('Wins: ' + game.wins);
     console.log('Losses: ' + game.losses);
-    const outcome = await game.playRound(); // bool
-    if (outcome) {
-      console.log('You win!')
-      game.wins++;
-    } else {
-      console.log('You Lose!')
-      game.losses++;
-    }
+    await game.playRound();
     const answer = await inquirer.prompt({
       type: 'confirm',
       name: 'playAgain',

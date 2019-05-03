@@ -15,10 +15,14 @@ class Letter {
 
   checkChar(character) {
     if (this.character === character) {
-      this.hasBeenGuessed = true;
+      this.revealChar();
       return true
     }
     return false;
+  }
+
+  revealChar() {
+    this.hasBeenGuessed = true;
   }
 }
 
