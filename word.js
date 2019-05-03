@@ -28,6 +28,10 @@ class Word {
       }
     })
   }
+
+  allCharactersGuessed() {
+    return this.correctCharacters === this.wordArr.length;
+  }
 }
 
 module.exports = Word;

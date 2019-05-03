@@ -2,7 +2,7 @@ const inquirer = require('inquirer')
 
 const Word = require('./word');
 
-
+const allowedGuesses = 10;
 
 class Game {
   constructor() {
@@ -11,7 +11,7 @@ class Game {
     this.wordObj;
     this.wins = 0;
     this.losses = 0;
-    
+    this.guessesLeft;
   }
 
   chooseRandomWord() {
@@ -20,30 +20,55 @@ class Game {
     this.wordObj = new Word(this.currentWord)
   }
 
-}
+  initializeGame() {
+    this.guessesLeft = allowedGuesses;
+  }
 
-async function playRound(game) {
-  game.chooseRandomWord();
-  console.log(game.wordObj)
-
-  // for (let i = 0; i < 3; i++) {
+  async playRound() {
+    this.initializeGame()
+    this.chooseRandomWord();
     
-  //   const ans = await inquirer.prompt({
-  //     type: 'input',
-  //     name: 'character',
-  //     message: 'Choose a character'
-  //   })
-  //   console.log(ans)
-
-  // }
+  
+    for (let i = 0; i < this.guessesLeft; i++) {
+      
+      const answer = await inquirer.prompt({
+        type: 'input',
+        name: 'guess',
+        message: 'Choose a character',
+        validate: function (value) {
+          value = value.toLowerCase()
+          // Check if input is a valid letter
+          if ("abcdefghijklmnopqrstuvwxyz".search(value) >= 0) {
+            return true;
+          }
+          return false;
+        }
+      })
+      const guessedLetter = answer.guess.toLowerCase();
+      this.wordObj.guessChar(guessedLetter)
+      console.log(this.wordObj.getWord())
+      if (this.wordObj.allCharactersGuessed()) {
+        return true
+      }
+    }
+    return false
+  
+  }
 
 }
+
+
 
 async function main() {
   const game = new Game();
 
   while (true) {
-    playRound(game);
+    const outcome = await game.playRound(); // bool
+    if (outcome) {
+      console.log('You win!')
+    } else {
+      console.log('You Lose!')
+    }
     const playAgain = await inquirer.prompt({
       type: 'confirm',
       name: 'playAgain',
