@@ -30,7 +30,7 @@ class Word {
     
     for (let i = 0; i < this.wordArr.length; i++) {
       const currentCharacter = this.wordArr[i]
-      if (currentCharacter.hasBeenGuessed) {
+      if (currentCharacter.hasBeenGuessed && currentCharacter.character === character) {
         return false; // Character has been guessed already
       }
       if (currentCharacter.checkChar(character)) {
