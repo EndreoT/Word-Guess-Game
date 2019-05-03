@@ -3,6 +3,7 @@ const Letter = require('./letter');
 class Word {
   constructor(word) {
     this.wordArr = this.constructWord(word);
+    this.correctCharacters = 0;
   }
 
   constructWord(word) {
@@ -22,14 +23,19 @@ class Word {
 
   guessChar(character) {
     this.wordArr.forEach(item => {
-      item.checkChar(character)
+      if (item.checkChar(character)) {
+        this.correctCharacters++;
+      }
     })
   }
 }
 
-const wordStr = 'alphabet';
-const word = new Word(wordStr)
-console.log(word.wordArr)
+module.exports = Word;
 
-word.guessChar('a')
-console.log(word.getWord())
+// const wordStr = 'alphabet';
+// const word = new Word(wordStr)
+// console.log(word.wordArr)
+
+// word.guessChar('a')
+// console.log(word.getWord())
+// console.log(word.correctCharacters)
