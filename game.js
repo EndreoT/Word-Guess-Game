@@ -37,7 +37,7 @@ class Game {
     this.printWord();
 
     while (this.guessesLeft) {
-      
+
       // Get user guess
       await inquirer.prompt({
         type: 'input',
@@ -50,30 +50,32 @@ class Game {
       if (this.wordObj.allCharactersGuessed()) {
         this.printDivider()
         this.printWord();
-        console.log('You win!')
+        console.log('YOU WIN!')
         this.wins++;
+        this.printDivider()
         return true
       }
+      this.printDivider();
     }
 
     // Loss
     this.losses++;
     this.printDivider()
-    console.log('You Lose!')
+    console.log('YOU LOSE!\n')
     console.log('The correct word is: ')
     console.log(this.wordObj.revealWord())
+    this.printDivider()
     return false
   }
 
   // Check if guessed character has been previously guessed, is contained in current word, or is not in current word
   validateGuess(guessedLetter) {
     guessedLetter = guessedLetter.toLowerCase()
-    
+
     // Check if input is a valid letter
-    // if ("abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && checkGuessResult != guessResult.ALREADY_GUESSED) {
-      if ("abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && !this.guessedLetters.has(guessedLetter)) {
-        const checkGuessResult = this.wordObj.guessChar(guessedLetter);
-        this.guessedLetters.add(guessedLetter)
+    if (guessedLetter && "abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && !this.guessedLetters.has(guessedLetter)) {
+      const checkGuessResult = this.wordObj.guessChar(guessedLetter);
+      this.guessedLetters.add(guessedLetter)
       if (checkGuessResult === guessResult.INCORRECT_GUESS) {
         // Guessed letter not in word
         this.guessesLeft--;
@@ -89,10 +91,14 @@ class Game {
     // Character has already been guessed
     console.log('\nCharacter has either been previously guessed, or is not in the alphabet')
     this.printWord();
+    this.printDivider()
     return false;
   }
 
   printWord() {
+    const guessedLettersArr = [];
+    this.guessedLetters.forEach(item => guessedLettersArr.push(item))
+    console.log("Guessed letters: " + guessedLettersArr.join(', '));
     console.log("Guesses left: " + this.guessesLeft + '\n');
     console.log(this.wordObj.getWord() + '\n')
   }

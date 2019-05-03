@@ -74,11 +74,3 @@ module.exports = {
   Word: Word,
   guessResult: guessResult,
 };
-
-// const wordStr = 'alphabet';
-// const word = new Word(wordStr)
-// console.log(word.wordArr)
-
-// word.guessChar('a')
-// console.log(word.getWord())
-// console.log(word.correctCharacters)

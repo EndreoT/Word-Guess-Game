@@ -3,7 +3,7 @@ const placeholder = '_'
 class Letter {
   constructor(character) {
     this.character = character;
-    if (character ===' ') {
+    if (character === ' ') {
       this.hasBeenGuessed = true;
     } else {
       this.hasBeenGuessed = false;
