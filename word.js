@@ -8,14 +8,18 @@ const guessResult = {
 
 class Word {
   constructor(word) {
-    this.wordArr = this.constructWord(word); // Letter[]
     this.correctCharacters = 0;
+    this.wordArr = this.constructWord(word); // Letter[]
   }
 
   constructWord(word) {
     const wordArr = [];
     for (let i = 0; i < word.length; i++) {
       wordArr.push(new Letter(word[i]))
+      // Check if character is a space (' ')
+      if (wordArr[i].hasBeenGuessed) {
+        this.correctCharacters++;
+      }
     }
     return wordArr;
   }
