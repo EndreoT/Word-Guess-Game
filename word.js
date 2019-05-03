@@ -2,7 +2,7 @@ const Letter = require('./letter');
 
 class Word {
   constructor(word) {
-    this.wordArr = this.constructWord(word);
+    this.wordArr = this.constructWord(word); // Letter[]
     this.correctCharacters = 0;
   }
 
@@ -22,11 +22,23 @@ class Word {
   }
 
   guessChar(character) {
-    this.wordArr.forEach(item => {
-      if (item.checkChar(character)) {
+    // this.wordArr.forEach(item => {
+    //   if (!item.hasBeenGuessed() && item.checkChar(character)) {
+    //     this.correctCharacters++;
+    //   }
+    // })
+    
+    for (let i = 0; i < this.wordArr.length; i++) {
+      const currentCharacter = this.wordArr[i]
+      if (currentCharacter.hasBeenGuessed) {
+        return false; // Character has been guessed already
+      }
+      if (currentCharacter.checkChar(character)) {
         this.correctCharacters++;
       }
-    })
+    }
+    return true;
+    
   }
 
   allCharactersGuessed() {

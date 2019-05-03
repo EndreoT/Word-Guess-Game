@@ -35,17 +35,17 @@ class Game {
         type: 'input',
         name: 'guess',
         message: 'Choose a character',
-        validate: function (value) {
-          value = value.toLowerCase()
+        validate: (guessedLetter) => {
+          guessedLetter = guessedLetter.toLowerCase()
           // Check if input is a valid letter
-          if ("abcdefghijklmnopqrstuvwxyz".search(value) >= 0) {
+          if ("abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && this.wordObj.guessChar(guessedLetter)) {
             return true;
           }
           return false;
         }
       })
-      const guessedLetter = answer.guess.toLowerCase();
-      this.wordObj.guessChar(guessedLetter)
+      // const guessedLetter = answer.guess.toLowerCase();
+      // console.log(this.wordObj.guessChar(guessedLetter))
       console.log(this.wordObj.getWord())
       if (this.wordObj.allCharactersGuessed()) {
         return true
