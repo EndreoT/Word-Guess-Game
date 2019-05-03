@@ -16,7 +16,7 @@ class Word {
     const wordArr = [];
     for (let i = 0; i < word.length; i++) {
       wordArr.push(new Letter(word[i]))
-      // Check if character is a space (' ')
+      // Check if character is a space character (' ')
       if (wordArr[i].hasBeenGuessed) {
         this.correctCharacters++;
       }
@@ -24,6 +24,11 @@ class Word {
     return wordArr;
   }
 
+  /* 
+  // Returns string representation of space separated character for the current word.
+  // Correctly guessed characters are shown as themselves (eg. 'a'), while non-guessed characters are
+  // shown as underscore characters. example: ( _ e l l o  f r i _ n _ )
+  */
   getWord() {
     const characterArr = this.wordArr.map(item => {
       return item.getChar();
@@ -36,9 +41,11 @@ class Word {
     for (let i = 0; i < this.wordArr.length; i++) {
       const currentCharacter = this.wordArr[i]
       if (currentCharacter.hasBeenGuessed && currentCharacter.character === character) {
-        return guessResult.ALREADY_GUESSED; // Character has been guessed already
+        // Character has been guessed already
+        return guessResult.ALREADY_GUESSED; 
       }
       if (currentCharacter.checkChar(character)) {
+        // Character is in word
         this.correctCharacters++;
         result = guessResult.CORRECT_GUESS
       }
@@ -47,6 +54,7 @@ class Word {
     if (result === guessResult.CORRECT_GUESS) {
       return result;
     }
+    // Character is not in word
     return guessResult.INCORRECT_GUESS;
   }
 

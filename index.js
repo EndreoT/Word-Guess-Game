@@ -10,6 +10,8 @@ async function main() {
     console.log('Wins: ' + game.wins);
     console.log('Losses: ' + game.losses);
     await game.playRound();
+
+    // Check if player wants to play again
     const answer = await inquirer.prompt({
       type: 'confirm',
       name: 'playAgain',
@@ -21,4 +23,5 @@ async function main() {
   }
   console.log('Thanks for playing!')
 }
+
 main()
