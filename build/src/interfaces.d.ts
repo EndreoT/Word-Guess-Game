@@ -1,8 +1,6 @@
-declare const placeholder = "_";
-declare class Letter {
+export default interface LetterInterface {
     character: string;
     hasBeenGuessed: boolean;
-    constructor(character: string);
     getChar(): string;
     checkChar(character: string): boolean;
     revealChar(): void;

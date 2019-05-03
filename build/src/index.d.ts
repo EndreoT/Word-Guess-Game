@@ -1,3 +1,3 @@
 declare const inquirer: any;
 declare const Game: any;
-declare function main(): Promise<void>;
+declare function main(): Promise<any>;

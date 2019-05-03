@@ -7,11 +7,11 @@ class Game {
     constructor() {
         // this.words = ['alphabet', 'two words'];
         this.words = ['two words'];
-        this.currentWord;
+        this.currentWord = '';
         this.wordObj; // Word()
         this.wins = 0;
         this.losses = 0;
-        this.guessesLeft;
+        this.guessesLeft = 0;
         this.guessedLetters = new Set();
     }
     chooseRandomWord() {
@@ -61,7 +61,7 @@ class Game {
     // Check if guessed character has been previously guessed, is contained in current word, or is not in current word
     validateGuess(guessedLetter) {
         guessedLetter = guessedLetter.toLowerCase();
-        // Check if input is a valid letter
+        // Check if input is a valid letter and has not already been guessed
         if (guessedLetter && "abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && !this.guessedLetters.has(guessedLetter)) {
             const checkGuessResult = this.wordObj.guessChar(guessedLetter);
             this.guessedLetters.add(guessedLetter);
@@ -80,6 +80,7 @@ class Game {
         // Character has already been guessed
         console.log('\nCharacter has either been previously guessed, or is not in the alphabet');
         this.printWord();
+        ;
         this.printDivider();
         return false;
     }

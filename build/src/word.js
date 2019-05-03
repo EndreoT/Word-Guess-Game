@@ -9,7 +9,7 @@ const guessResult = {
 class Word {
     constructor(word) {
         this.correctCharacters = 0;
-        this.wordArr = this.constructWord(word); // Letter[]
+        this.wordArr = this.constructWord(word);
     }
     constructWord(word) {
         const wordArr = [];
@@ -34,7 +34,7 @@ class Word {
         return characterArr.join(' ');
     }
     guessChar(character) {
-        let result;
+        let result = 0;
         for (let i = 0; i < this.wordArr.length; i++) {
             const currentCharacter = this.wordArr[i];
             if (currentCharacter.hasBeenGuessed && currentCharacter.character === character) {
