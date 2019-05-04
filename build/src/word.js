@@ -34,24 +34,27 @@ class Word {
         return characterArr.join(' ');
     }
     guessChar(character) {
-        let result = 0;
+        let result = false;
         for (let i = 0; i < this.wordArr.length; i++) {
             const currentCharacter = this.wordArr[i];
-            if (currentCharacter.hasBeenGuessed && currentCharacter.character === character) {
-                // Character has been guessed already
-                return guessResult.ALREADY_GUESSED;
-            }
+            // if (currentCharacter.hasBeenGuessed && currentCharacter.character === character) {
+            // Character has been guessed already
+            // return guessResult.ALREADY_GUESSED;
+            // return false;
+            // }
             if (currentCharacter.checkChar(character)) {
                 // Character is in word
                 this.correctCharacters++;
-                result = guessResult.CORRECT_GUESS;
+                // result = guessResult.CORRECT_GUESS
+                result = true;
             }
         }
-        if (result === guessResult.CORRECT_GUESS) {
-            return result;
-        }
+        // if (result === guessResult.CORRECT_GUESS) {
+        //   return result;
+        // }
         // Character is not in word
-        return guessResult.INCORRECT_GUESS;
+        // return guessResult.INCORRECT_GUESS;
+        return result;
     }
     allCharactersGuessed() {
         return this.correctCharacters === this.wordArr.length;
@@ -65,6 +68,5 @@ class Word {
 }
 module.exports = {
     Word,
-    guessResult,
 };
 //# sourceMappingURL=word.js.map

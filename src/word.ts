@@ -2,12 +2,6 @@ export { };
 
 const Letter = require('./letter');
 
-const guessResult = {
-  INCORRECT_GUESS: -1,
-  ALREADY_GUESSED: 0,
-  CORRECT_GUESS: 1
-}
-
 class Word {
   correctCharacters: number;
   wordArr: Letter[];
@@ -41,26 +35,17 @@ class Word {
     return characterArr.join(' ');
   }
 
-  guessChar(character: string) {
-    let result: number = 0;
+  guessChar(character: string): boolean {
+    let result: boolean = false;
     for (let i: number = 0; i < this.wordArr.length; i++) {
       const currentCharacter: Letter = this.wordArr[i]
-      if (currentCharacter.hasBeenGuessed && currentCharacter.character === character) {
-        // Character has been guessed already
-        return guessResult.ALREADY_GUESSED;
-      }
       if (currentCharacter.checkChar(character)) {
         // Character is in word
         this.correctCharacters++;
-        result = guessResult.CORRECT_GUESS
+        result = true
       }
     }
-
-    if (result === guessResult.CORRECT_GUESS) {
-      return result;
-    }
-    // Character is not in word
-    return guessResult.INCORRECT_GUESS;
+    return result;
   }
 
   allCharactersGuessed(): boolean {
@@ -77,5 +62,4 @@ class Word {
 
 module.exports = {
   Word,
-  guessResult,
 };

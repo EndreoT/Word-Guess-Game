@@ -65,7 +65,8 @@ class Game {
         if (guessedLetter && "abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && !this.guessedLetters.has(guessedLetter)) {
             const checkGuessResult = this.wordObj.guessChar(guessedLetter);
             this.guessedLetters.add(guessedLetter);
-            if (checkGuessResult === guessResult.INCORRECT_GUESS) {
+            // if (checkGuessResult === guessResult.INCORRECT_GUESS) {
+            if (!checkGuessResult) {
                 // Guessed letter not in word
                 this.guessesLeft--;
                 console.log('\n\nIncorrect!\n');

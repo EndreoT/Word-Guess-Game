@@ -4,7 +4,7 @@ const Game = require('./game');
 
 
 async function main(): Promise<any> {
-  const game: any = new Game();
+  const game = new Game();
 
   while (true) {
     console.log('Wins: ' + game.wins);

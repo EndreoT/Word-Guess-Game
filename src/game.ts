@@ -2,7 +2,7 @@ export { };
 
 const inquirer = require('inquirer')
 
-const { Word, guessResult } = require('./word');
+const { Word } = require('./word');
 
 const allowedGuesses: number = 4;
 
@@ -84,9 +84,9 @@ class Game {
 
     // Check if input is a valid letter and has not already been guessed
     if (guessedLetter && "abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && !this.guessedLetters.has(guessedLetter)) {
-      const checkGuessResult: string = this.wordObj.guessChar(guessedLetter);
+      const checkGuessResult: boolean = this.wordObj.guessChar(guessedLetter);
       this.guessedLetters.add(guessedLetter)
-      if (checkGuessResult === guessResult.INCORRECT_GUESS) {
+        if (!checkGuessResult) {
         // Guessed letter not in word
         this.guessesLeft--;
         console.log('\n\nIncorrect!\n')
