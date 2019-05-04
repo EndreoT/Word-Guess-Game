@@ -1,11 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const Letter = require('./letter');
-const guessResult = {
-    INCORRECT_GUESS: -1,
-    ALREADY_GUESSED: 0,
-    CORRECT_GUESS: 1
-};
 class Word {
     constructor(word) {
         this.correctCharacters = 0;
@@ -37,23 +32,12 @@ class Word {
         let result = false;
         for (let i = 0; i < this.wordArr.length; i++) {
             const currentCharacter = this.wordArr[i];
-            // if (currentCharacter.hasBeenGuessed && currentCharacter.character === character) {
-            // Character has been guessed already
-            // return guessResult.ALREADY_GUESSED;
-            // return false;
-            // }
             if (currentCharacter.checkChar(character)) {
                 // Character is in word
                 this.correctCharacters++;
-                // result = guessResult.CORRECT_GUESS
                 result = true;
             }
         }
-        // if (result === guessResult.CORRECT_GUESS) {
-        //   return result;
-        // }
-        // Character is not in word
-        // return guessResult.INCORRECT_GUESS;
         return result;
     }
     allCharactersGuessed() {
@@ -66,7 +50,5 @@ class Word {
         return this.getWord();
     }
 }
-module.exports = {
-    Word,
-};
+module.exports = Word;
 //# sourceMappingURL=word.js.map

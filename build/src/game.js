@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer = require('inquirer');
-const { Word, guessResult } = require('./word');
+const Word = require('./word');
+// import Word = WordModule.Word;
 const allowedGuesses = 4;
 class Game {
     constructor() {
@@ -65,7 +66,6 @@ class Game {
         if (guessedLetter && "abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && !this.guessedLetters.has(guessedLetter)) {
             const checkGuessResult = this.wordObj.guessChar(guessedLetter);
             this.guessedLetters.add(guessedLetter);
-            // if (checkGuessResult === guessResult.INCORRECT_GUESS) {
             if (!checkGuessResult) {
                 // Guessed letter not in word
                 this.guessesLeft--;
