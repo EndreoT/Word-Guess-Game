@@ -1,5 +1,4 @@
-declare const placeholder = "_";
-declare class Letter {
+export declare class Letter {
     character: string;
     hasBeenGuessed: boolean;
     constructor(character: string);

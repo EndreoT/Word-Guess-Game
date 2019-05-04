@@ -1,10 +1,10 @@
 const inquirer = require('inquirer')
 
-const Game = require('./game');
+import { Game } from './game';
 
 
 async function main(): Promise<any> {
-  const game = new Game();
+  const game: Game = new Game();
 
   while (true) {
     console.log('Wins: ' + game.wins);

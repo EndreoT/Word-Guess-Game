@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const Letter = require('./letter');
+const letter_1 = require("./letter");
 class Word {
     constructor(word) {
         this.correctCharacters = 0;
@@ -9,7 +9,7 @@ class Word {
     constructWord(word) {
         const wordArr = [];
         for (let i = 0; i < word.length; i++) {
-            wordArr.push(new Letter(word[i]));
+            wordArr.push(new letter_1.Letter(word[i]));
             // Check if character is a space character (' ')
             if (wordArr[i].hasBeenGuessed) {
                 this.correctCharacters++;
@@ -50,5 +50,5 @@ class Word {
         return this.getWord();
     }
 }
-module.exports = Word;
+exports.Word = Word;
 //# sourceMappingURL=word.js.map

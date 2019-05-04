@@ -1,8 +1,6 @@
-export { };
+import {Letter} from './letter';
 
-const Letter = require('./letter');
-
-class Word {
+export class Word {
   correctCharacters: number;
   wordArr: Letter[];
 
@@ -59,7 +57,3 @@ class Word {
     return this.getWord();
   }
 }
-
-module.exports = {
-  Word,
-};

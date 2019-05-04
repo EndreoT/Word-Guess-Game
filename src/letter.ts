@@ -1,6 +1,7 @@
 const placeholder = '_'
 
-class Letter {
+
+export class Letter {
   character: string;
   hasBeenGuessed: boolean;
 
@@ -33,4 +34,3 @@ class Letter {
   }
 }
 
-module.exports = Letter;

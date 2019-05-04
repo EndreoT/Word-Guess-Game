@@ -1,15 +1,14 @@
-export { };
-
 const inquirer = require('inquirer')
 
-const { Word } = require('./word');
+import { Word } from './word';
+
 
 const allowedGuesses: number = 4;
 
-class Game {
+export class Game {
   words: string[];
   currentWord: string;
-  wordObj: any;
+  wordObj!: Word;
   wins: number;
   losses: number;
   guessesLeft: number;
@@ -113,5 +112,3 @@ class Game {
     console.log(this.wordObj.getWord() + '\n')
   }
 }
-
-module.exports = Game;

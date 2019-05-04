@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const placeholder = '_';
 class Letter {
     constructor(character) {
@@ -27,5 +28,5 @@ class Letter {
         this.hasBeenGuessed = true;
     }
 }
-module.exports = Letter;
+exports.Letter = Letter;
 //# sourceMappingURL=letter.js.map

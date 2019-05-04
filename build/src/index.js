@@ -1,8 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer = require('inquirer');
-const Game = require('./game');
+const game_1 = require("./game");
 async function main() {
-    const game = new Game();
+    const game = new game_1.Game();
     while (true) {
         console.log('Wins: ' + game.wins);
         console.log('Losses: ' + game.losses);

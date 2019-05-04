@@ -1,8 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer = require('inquirer');
-const Word = require('./word');
-// import Word = WordModule.Word;
+const word_1 = require("./word");
 const allowedGuesses = 4;
 class Game {
     constructor() {
@@ -18,7 +17,7 @@ class Game {
     chooseRandomWord() {
         const randomIndex = Math.floor(Math.random() * this.words.length);
         this.currentWord = this.words[randomIndex];
-        this.wordObj = new Word(this.currentWord);
+        this.wordObj = new word_1.Word(this.currentWord);
     }
     initializeGame() {
         this.guessesLeft = allowedGuesses;
@@ -93,5 +92,5 @@ class Game {
         console.log(this.wordObj.getWord() + '\n');
     }
 }
-module.exports = Game;
+exports.Game = Game;
 //# sourceMappingURL=game.js.map
