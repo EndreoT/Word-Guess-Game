@@ -29,4 +29,11 @@ node ./build/src/index.js
 ```
 Both ways produce the same game
 
-### Examples
+### Compile
+```
+npm run compile
+```
+
+### Example
+
+![concert-this command](./assets/gifs/demonstration.gif)
