@@ -1,4 +1,4 @@
-const inquirer = require('inquirer')
+const inquirer = require('./node_modules/inquirer')
 
 const { Word, guessResult } = require('./word');
 

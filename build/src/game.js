@@ -2,18 +2,17 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer = require('inquirer');
 const word_1 = require("./word");
-const allowedGuesses = 4;
+const allowedGuesses = 5;
 class Game {
     constructor() {
-        // this.words = ['alphabet', 'two words'];
-        this.words = ['two words'];
+        this.words = ['alphabet', 'mississippi', 'jurassic world'];
         this.currentWord = '';
-        this.wordObj; // Word()
         this.wins = 0;
         this.losses = 0;
         this.guessesLeft = 0;
         this.guessedLetters = new Set();
     }
+    // Chooses a random word from a word list and then creates a Word object
     chooseRandomWord() {
         const randomIndex = Math.floor(Math.random() * this.words.length);
         this.currentWord = this.words[randomIndex];
@@ -26,6 +25,7 @@ class Game {
     printDivider() {
         console.log('========================================');
     }
+    // Initializeds the game, picks a random word, and lets the user guess characters
     async playRound() {
         this.initializeGame();
         this.chooseRandomWord();
@@ -40,22 +40,13 @@ class Game {
             });
             // Check for win
             if (this.wordObj.allCharactersGuessed()) {
-                this.printDivider();
-                this.printWord();
-                console.log('YOU WIN!');
-                this.wins++;
-                this.printDivider();
+                this.handleWin();
                 return true;
             }
             this.printDivider();
         }
-        // Loss
-        this.losses++;
-        this.printDivider();
-        console.log('YOU LOSE!\n');
-        console.log('The correct word is: ');
-        console.log(this.wordObj.revealWord());
-        this.printDivider();
+        // Player ran out of guesses. Handle loss
+        this.handleLoss();
         return false;
     }
     // Check if guessed character has been previously guessed, is contained in current word, or is not in current word
@@ -63,6 +54,7 @@ class Game {
         guessedLetter = guessedLetter.toLowerCase();
         // Check if input is a valid letter and has not already been guessed
         if (guessedLetter && "abcdefghijklmnopqrstuvwxyz".search(guessedLetter) >= 0 && !this.guessedLetters.has(guessedLetter)) {
+            // Check if letter is in word
             const checkGuessResult = this.wordObj.guessChar(guessedLetter);
             this.guessedLetters.add(guessedLetter);
             if (!checkGuessResult) {
@@ -77,10 +69,9 @@ class Game {
             this.printWord();
             return true;
         }
-        // Character has already been guessed
+        // Character has already been guessed or is not valid
         console.log('\nCharacter has either been previously guessed, or is not in the alphabet');
         this.printWord();
-        ;
         this.printDivider();
         return false;
     }
@@ -90,6 +81,21 @@ class Game {
         console.log("Guessed letters: " + guessedLettersArr.join(', '));
         console.log("Guesses left: " + this.guessesLeft + '\n');
         console.log(this.wordObj.getWord() + '\n');
+    }
+    handleWin() {
+        this.printDivider();
+        this.printWord();
+        console.log('YOU WIN!');
+        this.wins++;
+        this.printDivider();
+    }
+    handleLoss() {
+        this.losses++;
+        this.printDivider();
+        console.log('YOU LOSE!\n');
+        console.log('The correct word is: ');
+        console.log(this.wordObj.revealWord());
+        this.printDivider();
     }
 }
 exports.Game = Game;

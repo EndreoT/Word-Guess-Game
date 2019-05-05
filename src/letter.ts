@@ -1,4 +1,4 @@
-const placeholder = '_'
+const placeholder = '_';
 
 
 export class Letter {
@@ -7,6 +7,8 @@ export class Letter {
 
   constructor(character: string) {
     this.character = character;
+
+    // Check if character is the space character (' ')
     if (character === ' ') {
       this.hasBeenGuessed = true;
     } else {
@@ -14,6 +16,7 @@ export class Letter {
     }
   }
 
+  // If character has been correctly guessed, return the character. Else, return the placeholder character.
   getChar(): string {
     if (this.hasBeenGuessed) {
       return this.character;
@@ -21,6 +24,7 @@ export class Letter {
     return placeholder;
   }
 
+  // Check if character argument is equal to the actual character field
   checkChar(character: string): boolean {
     if (this.character === character) {
       this.revealChar();

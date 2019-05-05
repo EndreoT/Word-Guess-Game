@@ -1,4 +1,4 @@
-const inquirer = require('inquirer')
+const inquirer = require('inquirer');
 
 import { Game } from './game';
 
@@ -6,6 +6,7 @@ import { Game } from './game';
 async function main(): Promise<any> {
   const game: Game = new Game();
 
+  // Main game loop
   while (true) {
     console.log('Wins: ' + game.wins);
     console.log('Losses: ' + game.losses);
@@ -15,8 +16,8 @@ async function main(): Promise<any> {
     const answer = await inquirer.prompt({
       type: 'confirm',
       name: 'playAgain',
-      message: 'Play again?'
-    })
+      message: 'Play again?',
+    });
     if (!answer.playAgain) {
       break;
     }

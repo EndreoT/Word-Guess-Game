@@ -14,4 +14,6 @@ export declare class Game {
     playRound(): Promise<any>;
     validateGuess(guessedLetter: string): boolean;
     printWord(): void;
+    handleWin(): void;
+    handleLoss(): void;
 }

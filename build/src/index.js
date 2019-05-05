@@ -4,6 +4,7 @@ const inquirer = require('inquirer');
 const game_1 = require("./game");
 async function main() {
     const game = new game_1.Game();
+    // Main game loop
     while (true) {
         console.log('Wins: ' + game.wins);
         console.log('Losses: ' + game.losses);
@@ -12,7 +13,7 @@ async function main() {
         const answer = await inquirer.prompt({
             type: 'confirm',
             name: 'playAgain',
-            message: 'Play again?'
+            message: 'Play again?',
         });
         if (!answer.playAgain) {
             break;
