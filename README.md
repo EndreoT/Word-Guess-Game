@@ -19,15 +19,10 @@ cd path/to/Word-Guess-Game
 npm install
 ```
 ### How to run
-To run original javascript files:
-```
-node ./original-javascript-files/index.js
-```
-Or to run compiled js files:
+To run compiled js files:
 ```
 node ./build/src/index.js
 ```
-Both ways produce the same game
 
 ### Compile
 ```
